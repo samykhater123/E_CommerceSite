@@ -1,5 +1,7 @@
+using E_CommerceSite.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,7 +15,23 @@ namespace E_CommerceSite
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                try
+                {
+                    seeddata.initialize(services);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

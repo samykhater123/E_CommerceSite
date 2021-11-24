@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using E_CommerceSite.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,7 @@ namespace E_CommerceSite.infrestracuter
         {
 
         }
+
+        public DbSet<pages> page { get; set; }
     }
 }

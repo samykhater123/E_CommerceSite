@@ -1,0 +1,46 @@
+﻿@model IEnumerable<pages>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+           
+            <th>
+                Taitle
+            </th>
+            <th>
+                Slug
+            </th>
+            
+            
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.titel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.slug)
+            </td>
+           
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-success">Edite</a>
+                <a asp-action="Details" asp-route-id="@item.id" class="btn btn-dark">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-danger">Delete</a>
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
