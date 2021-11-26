@@ -37,8 +37,12 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-success">Edite</a>
                 <a asp-action="Details" asp-route-id="@item.id" class="btn btn-dark">Details</a>
-                <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-danger">Delete</a>
-                
+                @if (item.slug != "home")
+                {
+                    <a  asp-action="Delete" asp-route-id="@item.id" class="confirmdeleations" onsubmit="confirm();" >Delete</a>
+                }
+
+
             </td>
         </tr>
 }

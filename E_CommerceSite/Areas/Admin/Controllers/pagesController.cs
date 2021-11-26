@@ -63,12 +63,76 @@ namespace E_CommerceSite.Areas.Admin.Controllers
 
                 db.Add(bage);
                 await db.SaveChangesAsync();
+
+                TempData["success"] = "the page has been add";
+
                 return RedirectToAction("Index");
             }
 
            
 
             return View(bage);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            pages pag = await db.page.FindAsync(id);
+
+            if (pag == null)
+            {
+                return NotFound();
+            }
+
+            return View(pag);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(pages bage)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                bage.slug = bage.id == 1 ? "home" : bage.titel.ToLower().Replace(" ", "-"); 
+                
+                
+                var slug = await db.page.Where(p=>p.id !=bage.id).FirstOrDefaultAsync(x => x.slug == bage.slug);
+                if (slug != null)
+                {
+                    ModelState.AddModelError("", "page is exostes");
+                    return View(bage);
+                }
+
+                db.Update(bage);   
+                await db.SaveChangesAsync();
+
+                TempData["success"] = "the page has been edited";
+
+                return RedirectToAction("Edit",new { id=bage.id});
+            }
+
+
+
+            return View(bage);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            pages pag = await db.page.FindAsync(id);
+
+            db.page.RemoveRange();
+
+            if (pag == null)
+            {
+                TempData["Error"] = "the page dosent existe";
+            }
+            else
+            {
+                db.page.Remove(pag);
+                await db.SaveChangesAsync();
+                TempData["success"] = "the page has been removed";
+            }
+            return RedirectToAction("Index");
         }
     }
 }
