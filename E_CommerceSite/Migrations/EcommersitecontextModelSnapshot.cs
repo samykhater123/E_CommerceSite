@@ -18,6 +18,29 @@ namespace E_CommerceSite.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
+            modelBuilder.Entity("E_CommerceSite.Models.Category", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("slug")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("sorting")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("categories");
+                });
+
             modelBuilder.Entity("E_CommerceSite.Models.pages", b =>
                 {
                     b.Property<int>("id")
@@ -30,7 +53,6 @@ namespace E_CommerceSite.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("slug")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("sorting")

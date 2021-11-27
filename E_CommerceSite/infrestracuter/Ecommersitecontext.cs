@@ -16,5 +16,6 @@ namespace E_CommerceSite.infrestracuter
         }
 
         public DbSet<pages> page { get; set; }
+        public DbSet<Category> categories { get; set; }
     }
 }

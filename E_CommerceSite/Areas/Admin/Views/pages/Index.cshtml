@@ -8,43 +8,63 @@
 <p>
     <a asp-action="Create" class="btn btn-success">Create New</a>
 </p>
-<table class="table">
+<table class="table sorting" id="pages">
     <thead>
-        <tr>
-           
+        <tr class="home">
+
             <th>
                 Taitle
             </th>
             <th>
                 Slug
             </th>
-            
-            
+
+
             <th>Options</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.titel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.slug)
-            </td>
-           
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-success">Edite</a>
-                <a asp-action="Details" asp-route-id="@item.id" class="btn btn-dark">Details</a>
-                @if (item.slug != "home")
-                {
-                    <a  asp-action="Delete" asp-route-id="@item.id" class="confirmdeleations" onsubmit="confirm();" >Delete</a>
-                }
+        @foreach (var item in Model)
+        {
+            <tr id="id_@item.id" class="@item.slug">
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.titel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.slug)
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-success">Edite</a>
+                    <a asp-action="Details" asp-route-id="@item.id" class="btn btn-dark">Details</a>
+                    @if (item.slug != "home")
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.id" class="confirmdeleations" onsubmit="confirm();">Delete</a>
+                    }
 
 
-            </td>
-        </tr>
-}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+@section Scripts {
+   
+
+    <script>
+        $("table#pages tbody").sortable({
+            items:"tr:not(.home)",
+            placeholder: "ui-state-highlight",
+            update: function () {
+                let ids = $("table#pages tbody").sortable("serialize");
+                let url = "/Admin/pages/reorder";
+
+                $.post(url, ids, function () {})
+            }
+
+        })
+    </script>
+}

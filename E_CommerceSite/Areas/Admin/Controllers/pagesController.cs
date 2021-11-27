@@ -134,5 +134,23 @@ namespace E_CommerceSite.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> reorder(int[] id)
+        {
+            int count = 1;
+            foreach (var pageid in id)
+            {
+                pages page = await db.page.FindAsync(pageid);
+                page.sorting = count;
+                db.Update(page);
+                await db.SaveChangesAsync();
+                count++;
+
+            }
+            return Ok();
+        }
+
     }
 }
