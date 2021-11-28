@@ -18,21 +18,19 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                       @await Component.InvokeAsync("Mainmenu")
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+   @* <div class="container box-shadow d-sm-inline-flex border-top" style="width:1000px;">*@
+    <div class="h-100 row align-items-center border-bottom border-top" style="margin-left:50px;margin-right:10px;">
+        <div style="margin-left:10px;">
+            <main role="main" class="pb-4">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">

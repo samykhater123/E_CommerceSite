@@ -1,0 +1,13 @@
+﻿@model IEnumerable<pages>
+
+@foreach (var item in Model)
+{
+    @if (item.slug != "home")
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Pages" asp-action="Pages" asp-route-slug="@item.slug">@item.titel</a>
+        </li>
+    }
+
+    
+}

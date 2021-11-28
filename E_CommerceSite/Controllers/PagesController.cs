@@ -19,11 +19,11 @@ namespace E_CommerceSite.Controllers
             
         }
 
-        public async Task <IActionResult> Pages(string slug)
+        public IActionResult Pages(string slug)
         {
             if (slug == null)
             {
-                return View( db.page.Where(x => x.slug == "home").FirstOrDefault());
+                return View(db.page.Where(x => x.slug == "home").FirstOrDefault());
             }
             pages page = db.page.Where(x => x.slug == slug).FirstOrDefault();
             if (page == null)

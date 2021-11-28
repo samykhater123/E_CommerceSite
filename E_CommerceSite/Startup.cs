@@ -53,9 +53,14 @@ namespace E_CommerceSite
             {
                 endpoints.MapControllerRoute(
                   "Pages",
-                 "{slug?}",
+                  "{slug?}",
                  defaults:new {controller="Pages",action="Pages"}
-          );
+            );
+                endpoints.MapControllerRoute(
+                 "Product",
+                 "Product",
+                defaults: new { controller = "Product", action = "ProductbyCategory" }
+           );
                 endpoints.MapControllerRoute(
                    name: "areas",
                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"

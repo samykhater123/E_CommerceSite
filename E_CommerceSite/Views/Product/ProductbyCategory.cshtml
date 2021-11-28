@@ -1,0 +1,24 @@
+﻿@model IEnumerable<product>
+@{
+    ViewData["Title"] = "product";
+}
+
+<h1 class="display-4 pb-5">@ViewBag.categoryname </h1>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-4">
+            <img  src="~/madia/product/@item.image" class="img-fluid"alt=""/>
+            <h4>@item.name</h4>
+            <div>
+                @Html.Raw(item.discription)
+            </div>
+            <p>@item.price.ToString("c2")</p>
+            <p>
+                <a href="#" class="btn btn-primary">Add To Card</a>
+            </p>
+        </div>
+    }
+
+</div>
