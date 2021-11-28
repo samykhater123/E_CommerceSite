@@ -1,0 +1,71 @@
+﻿@model E_CommerceSite.Models.product
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<h4>product</h4>
+
+<div class="row">
+    <div class="col-md-10">
+        <form asp-action="Create"   enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="name" class="control-label"></label>
+                <input asp-for="name" class="form-control" />
+                <span asp-validation-for="name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="slug" class="control-label"></label>
+                <input asp-for="slug" class="form-control" />
+                <span asp-validation-for="slug" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="discription" class="control-label"></label>
+                <textarea asp-for="discription" class="form-control" ></textarea>
+                <span asp-validation-for="discription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="price" class="control-label"></label>
+                <input asp-for="price" class="form-control" />
+                <span asp-validation-for="price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="image" class="control-label">Product Image</label>
+                <input asp-for="imageuploade" class="form-control" />
+                <img src="" id="uploadimage" alt="" />
+                <span asp-validation-for="imageuploade" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="categoryid" class="control-label">category</label>
+                <select asp-for="categoryid" asp-items="@ViewBag.category" class="form-control">
+                    <option value="0">choose the category</option>
+                </select>
+                
+                <span asp-validation-for="categoryid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-danger" >Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script>
+    CKEDITOR.replace("discription");
+
+    $('#imageuploade').change(function () {
+        readurl(this);
+    });
+</script>
+}

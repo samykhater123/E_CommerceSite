@@ -3,14 +3,16 @@ using E_CommerceSite.infrestracuter;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace E_CommerceSite.Migrations
 {
     [DbContext(typeof(Ecommersitecontext))]
-    partial class EcommersitecontextModelSnapshot : ModelSnapshot
+    [Migration("20211127121735_product")]
+    partial class product
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

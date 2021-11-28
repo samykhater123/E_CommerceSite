@@ -1,0 +1,62 @@
+﻿@model IEnumerable<E_CommerceSite.Models.product>
+
+@{
+    ViewData["Title"] = "Index product";
+}
+
+<h1>Products</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New product</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                Name
+            </th>
+
+            <th>
+                price
+            </th>
+            <th>
+                image
+            </th>
+            <th>
+                category
+            </th>
+            <th>options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+
+                <td>
+                    @item.price.ToString("c2")
+                </td>
+                <td>
+                    <img src="~/madia/product/@item.image" width="150" height="150" alt="" />
+                </td>
+                <td>
+                    @item.category.name
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-success">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.id" class="btn btn-dark">Details</a>
+
+                    <a asp-action="Delete" asp-route-id="@item.id" class="confirmdeleations">Delete</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<Pagination page-count="@ViewBag.totalpages" page-target="/Admin/Product" page-number="@ViewBag.pagenumber" page-range="@ViewBag.pagerange"></Pagination>
