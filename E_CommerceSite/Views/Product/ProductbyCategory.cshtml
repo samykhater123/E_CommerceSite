@@ -9,14 +9,14 @@
     @foreach (var item in Model)
     {
         <div class="col-4">
-            <img  src="~/madia/product/@item.image" class="img-fluid"alt=""/>
+            <img  src="~/madia/product/@item.image" class="img-fluid"alt=""width="200"height="200"/>
             <h4>@item.name</h4>
             <div>
                 @Html.Raw(item.discription)
             </div>
             <p>@item.price.ToString("c2")</p>
             <p>
-                <a href="#" class="btn btn-primary">Add To Card</a>
+                <a asp-controller="Card" asp-action="Add" asp-route-id="@item.id" class="btn btn-primary">Add To Card</a>
             </p>
         </div>
     }

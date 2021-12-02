@@ -25,6 +25,13 @@ namespace E_CommerceSite
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
+            services.AddSession(options =>
+            {
+                //options.IdleTimeout = TimeSpan.FromSeconds(2);
+                //options.IdleTimeout = TimeSpan.FromDays(2);
+            });
+
             services.AddControllersWithViews();
             services.AddDbContext<Ecommersitecontext>(options => options.UseSqlServer(Configuration.GetConnectionString("Ecommersitecontext")));
         }
@@ -47,6 +54,8 @@ namespace E_CommerceSite
 
             app.UseRouting();
 
+            app.UseSession();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -57,8 +66,14 @@ namespace E_CommerceSite
                  defaults:new {controller="Pages",action="Pages"}
             );
                 endpoints.MapControllerRoute(
+                 "Card",
+                 "Add/{id}",
+                defaults: new { controller = "Card", action = "Add" }
+           );
+
+                endpoints.MapControllerRoute(
                  "Product",
-                 "Product",
+                 "Product/{categoryslug}",
                 defaults: new { controller = "Product", action = "ProductbyCategory" }
            );
                 endpoints.MapControllerRoute(

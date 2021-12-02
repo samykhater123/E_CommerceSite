@@ -18,6 +18,8 @@ namespace E_CommerceSite.Controllers
             this.db = db;
         }
 
+
+
         public IActionResult Index(int p = 1)
         {
             int pagesize = 6;
